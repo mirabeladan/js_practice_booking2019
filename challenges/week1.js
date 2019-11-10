@@ -49,22 +49,52 @@ function reverseWord(word) {
 
 function reverseAllWords(words) {
   if (words === undefined) throw new Error("words is required");
-  // Add your code here!
+  let convertString = words.toString();
+  let splitString = convertString.split("");
+  let reverseArray = splitString.reverse();
+  let joinArray = reverseArray.join("");
+  let joinArray2 = joinArray.split(",");
+  let reverseArray2 = joinArray2.reverse();
+  return reverseArray2;
 }
+
 
 function countLinuxUsers(users) {
   if (users === undefined) throw new Error("users is required");
-  // Add your code here!
+let count = 0;
+for (let i = 0; i<users.length; i++) {
+  if (users[i]["type"] === "Linux") {
+    count +=1;
+  }
+}
+  return count;
 }
 
 function getMeanScore(scores) {
   if (scores === undefined) throw new Error("scores is required");
-  // Add your code here!
-}
+    let totalSum = 0;
+    for (let i in scores) {
+      totalSum += scores[i];
+    }
+    let scoreCount = scores.length;
+    let average = totalSum / scoreCount;
+    return Number(average.toFixed(2))
+  }
 
 function simpleFizzBuzz(n) {
   if (n === undefined) throw new Error("n is required");
-  // Add your code here!
+  if (n % 3 === 0 && n % 5 != 0) {
+    return "fizz";
+  }
+  else if (n % 5 === 0 && n % 3 != 0) {
+    return "buzz";
+  }
+  else if (n % 3 != 0 && n % 5 != 0) {
+    return n;
+  }
+  else if (n % 3 === 0 && n % 5 === 0) {
+    return "fizzbuzz";
+  }
 }
 
 module.exports = {
