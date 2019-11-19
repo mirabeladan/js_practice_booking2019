@@ -1,12 +1,16 @@
 function getSquares(nums) {
   if (nums === undefined) throw new Error("nums is required");
-  // Your code here!
+    return nums.map ( x => x*x);
 }
 
 function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
-  // Your code here!
-}
+  var newarray1 = [];
+  for (let i = 1; i < words.length; i++) {
+    newarray1.push(words[i].charAt(0).toUpperCase() + words[i].slice(1));
+  }
+  return words[0] + newarray1.join('');
+  }
 
 function getTotalSubjects(people) {
   if (people === undefined) throw new Error("people is required");
