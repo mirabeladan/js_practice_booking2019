@@ -24,13 +24,30 @@ function getTotalSubjects(people) {
 function checkIngredients(menu, ingredient) {
   if (menu === undefined) throw new Error("menu is required");
   if (!ingredient) throw new Error("ingredient is required");
-  // Your code here!
+
+  let isPresent = false;
+
+  menu.forEach(item => {
+    if (item.ingredients.some(itemIngredient => itemIngredient == ingredient)) {
+      isPresent = true;
+    }
+
+  })
+
+  return isPresent;
 }
+
 
 function duplicateNumbers(arr1, arr2) {
   if (arr1 === undefined) throw new Error("arr1 is required");
   if (arr2 === undefined) throw new Error("arr2 is required");
-  // Your code here!
+  let commonNum = arr1.filter(function (n) {
+    return arr2.indexOf(n) !== -1;
+  });
+  let sortedNum = commonNum.sort();
+  let uniqueSet = new Set(sortedNum);
+  let backToArray = [...uniqueSet];
+  return backToArray;
 }
 
 module.exports = {
