@@ -52,18 +52,11 @@ return result;
 
 function getSquareRoots(nums) {
   if (!nums) throw new Error("nums is required");
-  let squareArray = [];
-let result = nums.map(x => Math.sqrt(x));
-for (let i=0; i< result.length; i++) {
-  if (result[i] % 1 != 0) {
-    squareArray.push(result[i]);
-  }
-  else {
-    squareArray.push(result[i].toFixed(2));
-  }
+  return nums.map(x => {
+    let square = Math.sqrt(x);
+    return Number(square.toFixed(2));
+  });
 }
-return squareArray;
- }
 
  function findSentencesContaining(sentences, str) {
    if (!sentences) throw new Error("sentences is required");
@@ -77,10 +70,15 @@ return squareArray;
    return sentenceArr;
  }
 
-function getLongestSides(triangles) {
-  if (!triangles) throw new Error("triangles is required");
-  // Your code here
-}
+ function getLongestSides(triangles) {
+   if (!triangles) throw new Error("triangles is required");
+   let longestSides = [];
+   for (let i = 0; i < triangles.length; i++) {
+     let maximum = Math.max.apply(Math, triangles[i]);
+     longestSides.push(maximum);
+   }
+   return longestSides;
+ }
 
 module.exports = {
   findSmallNums,
