@@ -65,11 +65,17 @@ for (let i=0; i< result.length; i++) {
 return squareArray;
  }
 
-function findSentencesContaining(sentences, str) {
-  if (!sentences) throw new Error("sentences is required");
-  if (!str) throw new Error("str is required");
-  // Your code here
-}
+ function findSentencesContaining(sentences, str) {
+   if (!sentences) throw new Error("sentences is required");
+   if (!str) throw new Error("str is required");
+   let sentenceArr = [];
+   for (let i = 0; i < sentences.length; i++) {
+     if (sentences[i].toLowerCase().indexOf(str.toLowerCase()) >= 0) {
+       sentenceArr.push(sentences[i]);
+     }
+   }
+   return sentenceArr;
+ }
 
 function getLongestSides(triangles) {
   if (!triangles) throw new Error("triangles is required");
