@@ -45,13 +45,25 @@ return integerArr;
 
 function getCities(users) {
   if (!users) throw new Error("users is required");
-  // Your code here
+let result = users.map(a => a.data.city.displayName);
+return result;
 }
+
 
 function getSquareRoots(nums) {
   if (!nums) throw new Error("nums is required");
-  // Your code here
+  let squareArray = [];
+let result = nums.map(x => Math.sqrt(x));
+for (let i=0; i< result.length; i++) {
+  if (result[i] % 1 != 0) {
+    squareArray.push(result[i]);
+  }
+  else {
+    squareArray.push(result[i].toFixed(2));
+  }
 }
+return squareArray;
+ }
 
 function findSentencesContaining(sentences, str) {
   if (!sentences) throw new Error("sentences is required");
