@@ -15,8 +15,24 @@ if (p === nums.legth - 1) {
 
 const count1sand0s = str => {
   if (str === undefined) throw new Error("str is required");
-  // Your code here!
-};
+ let count1 = 0;
+   //loop through the word
+    for (i = 0; i < str.length; i++) {
+       //if the character in the word is equal to  the character passed in as a parameter increment count
+       if (str[i] === "1") {
+           count1++;
+       }
+  }
+let count0 = 0;
+for (i=0; i<str.length; i++) {
+  if (str[i] === "0") {
+    count0++
+  }
+}
+  return ({
+    "1": count1, 
+    "0": count0 }
+    ) };
 
 const reverseNumber = n => {
   if (n === undefined) throw new Error("n is required");
