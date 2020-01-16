@@ -5,8 +5,20 @@
  * @returns {Number}
  */
 const sumMultiples = arr => {
-  if (arr === undefined) throw new Error("arr is required");
-};
+  let array = [];
+  for (let i = 0; i <= arr.length; i++) {
+    if (arr[i] % 3 === 0 || arr[i] % 5 === 0) {
+      array.push(arr[i]);
+    }
+  }
+  let sum = array.reduce(function (a, b) { return a + b; }, 0);
+if (sum===0) {
+  return null;
+}
+else {
+  return sum;
+}
+}
 
 /**
  * This function will receive a string of characters and should return true/false depending on whether it is a valid DNA string. A valid DNA string may contain characters C, G, T or A only.
@@ -15,6 +27,7 @@ const sumMultiples = arr => {
  */
 const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
+  
 };
 
 /**
