@@ -12,12 +12,12 @@ const sumMultiples = arr => {
     }
   }
   let sum = array.reduce(function (a, b) { return a + b; }, 0);
-if (sum===0) {
-  return null;
-}
-else {
-  return sum;
-}
+  if (sum === 0) {
+    return null;
+  }
+  else {
+    return sum;
+  }
 }
 
 /**
@@ -27,7 +27,18 @@ else {
  */
 const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
-  
+  const arr = str.toUpperCase().split('');
+  if (arr.length === 4 &&
+    arr.indexOf('C') !== -1
+    && arr.indexOf('G') !== -1
+    && arr.indexOf('T') !== -1
+    && arr.indexOf('A') !== -1) {
+    return true;
+  }
+  else if (arr.length !== 4) {
+    return "not a valid DNA string"
+  }
+  return false;
 };
 
 /**
@@ -37,7 +48,26 @@ const isValidDNA = str => {
  */
 const getComplementaryDNA = str => {
   if (str === undefined) throw new Error("str is required");
-};
+  if (isValidDNA(str) === false) throw new Error("not a valid DNA string");
+  let complementaryDNA = [];
+  let upperString = str.toUpperCase();
+  for (let i = 0; i < upperString.length; i++) {
+    if (upperString[i] === "C") {
+      complementaryDNA.push("G")
+    }
+    else if (upperString[i] === "G") {
+      complementaryDNA.push("C")
+    }
+    else if (upperString[i] === "T") {
+      complementaryDNA.push("A")
+    }
+    else if (upperString[i] === "A") {
+      complementaryDNA.push("T")
+    }
+  }
+  return complementaryDNA.join("");
+}
+  ;
 
 /**
  * This function should receive a number and return true/false depending on whether it is a prime number or not. A prime number is a number that can only be divided evenly by 1 and itself (for example, 7)
@@ -46,6 +76,14 @@ const getComplementaryDNA = str => {
  */
 const isItPrime = n => {
   if (n === undefined) throw new Error("n is required");
+  if (!Number.isInteger(n)) throw new Error("a number is required")
+  if (n < 2) return false;
+  for (var i = 2; i < n; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 };
 
 /**
@@ -62,7 +100,9 @@ const isItPrime = n => {
 const createMatrix = (n, fill) => {
   if (n === undefined) throw new Error("n is required");
   if (fill === undefined) throw new Error("fill is required");
+  return Array(n).fill(Array(n).fill(fill));
 };
+
 
 /**
  * This function takes an array of staff objects in the format:
@@ -79,6 +119,18 @@ const createMatrix = (n, fill) => {
 const areWeCovered = (staff, day) => {
   if (staff === undefined) throw new Error("staff is required");
   if (day === undefined) throw new Error("day is required");
+  let days = 0;
+  staff.forEach((person) => {
+    for (let i = 0; i < person.rota.length; i++) {
+      if (person.rota[i] === day) {
+        days++;
+      }
+    }
+  });
+  if (days >= 3) {
+    return true;
+  }
+  return false;
 };
 
 module.exports = {
