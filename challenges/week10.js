@@ -27,9 +27,14 @@ const sumDigits = n => {
  * @param {Number} end
  * @param {Number} step
  */
-const createRange = (start, end, step) => {
+const createRange = (start, end, step=1) => {
   if (start === undefined) throw new Error("start is required");
   if (end === undefined) throw new Error("end is required");
+  let ans = [];
+  for (let i = start; i <= end; i=i+step) {
+      ans.push(i);
+  }
+  return ans;
 };
 
 /**
@@ -46,7 +51,7 @@ const createRange = (start, end, step) => {
  *                ]
  *   },
  *   {
- *    username: "sam_j_1989",
+ *    username: "sam_j_1989"
  *    name: "Sam Jones",
  *    screenTime: [
  *                 { date: "2019-06-11", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 10} },
@@ -64,7 +69,20 @@ const createRange = (start, end, step) => {
 const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
+  const userAlert = [];
+  users.forEach(person => {
+    let screenTimeDay = person.screenTime.filter(usageDay => date === usageDay.date);
+    if (screenTimeDay.length > 0) {
+      const screenMinutes = Object.values(screenTimeDay[0].usage).reduce((total, amount) => total + amount, 0);
+      if (screenMinutes > 100) {
+        userAlert.push(person.username);
+      }
+    }
+  });
+  return userAlert.toString();
 };
+
+
 
 /**
  * This function will receive a hexadecimal color code in the format #FF1133. A hexadecimal code is a number written in hexadecimal notation, i.e. base 16. If you want to know more about hexadecimal notation:
@@ -78,6 +96,19 @@ const getScreentimeAlertList = (users, date) => {
  */
 const hexToRGB = hexStr => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  if (hexStr.length == 7) {
+    r = "0x" + hexStr[1] + hexStr[2];
+    g = "0x" + hexStr[3] + hexStr[4];
+    b = "0x" + hexStr[5] + hexStr[6];
+  } else {
+    return false;
+  }
+
+  return "rgb(" + +r + "," + +g + "," + +b + ")";
 };
 
 /**
@@ -91,7 +122,36 @@ const hexToRGB = hexStr => {
  * @param {Array} board
  */
 const findWinner = board => {
-  if (board === undefined) throw new Error("board is required");
+  if (board === undefined) throw new Error("board required");
+  let winner = null;
+  let boardArr = [];
+  for (let i = 0; i < board.length; i++) {
+    let row = board[i];
+    for (let i = 0; i < row.length; i++) {
+      boardArr.push(row[i]);
+    }
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    if ((boardArr[0] === boardArr[1]) && (boardArr[0] === boardArr[2])) {
+      winner = boardArr[0];
+    } else if ((boardArr[3] === boardArr[4]) && (boardArr[3] === boardArr[5])) {
+      winner = boardArr[3];
+    } else if ((boardArr[6] === boardArr[7]) && (boardArr[6] === boardArr[8])) {
+      winner = boardArr[6];
+    } else if ((boardArr[0] === boardArr[3]) && (boardArr[0] === boardArr[6])) {
+      winner = boardArr[0];
+    } else if ((boardArr[1] === boardArr[4]) && (boardArr[1] === boardArr[7])) {
+      winner = boardArr[1];
+    } else if ((boardArr[2] === boardArr[5]) && (boardArr[2] === boardArr[8])) {
+      winner = boardArr[2];
+    } else if ((boardArr[0] === boardArr[4]) && (boardArr[0] === boardArr[8])) {
+      winner = boardArr[0];
+    } else if ((boardArr[2] === boardArr[4]) && (boardArr[2] === boardArr[6])) {
+      winner = boardArr[2];
+    }
+  }
+  return winner;
 };
 
 module.exports = {
